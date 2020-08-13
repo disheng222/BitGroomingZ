@@ -6,6 +6,7 @@
 #include <stdint.h>
 #include <time.h>
 #include <sys/time.h>
+#include "conf.h"
 
 #ifndef _BG_H
 #define _BG_H
@@ -13,6 +14,11 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+# define M_LN10      2.30258509299404568401799145468436421   /* loge(10)       */
+# define M_LN2       0.693147180559945309417232121458176568  /* loge(2)        */
+#define int_CEWI 0
+#define NCO_PPC_BIT_XPL_NBR_MIN 2
 
 typedef union lint16
 {
@@ -85,7 +91,7 @@ extern bg_exedata *exe_params;
 
 unsigned char *BG_compress(int dataType, void *data, size_t *outSize, size_t nbEle);
 
-unsigned char* BG_compress_args(int dataType, void *data, size_t *outSize, int errorControlMode, int nsd, int dsd, size_t nbEle);
+unsigned char* BG_compress_args(int dataType, void *data, size_t *outSize, int bgMode, int errorControlMode, int nsd, int dsd, size_t nbEle);
 
 void *BG_decompress(int dataType, unsigned char *bytes, size_t byteLength, size_t nbEle);
 

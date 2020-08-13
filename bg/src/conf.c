@@ -105,7 +105,7 @@ int BG_ReadConf(const char* bg_cfgFile) {
 		return BG_NSCS;
     }
 	
-	if(confparams_cpr->sol_ID==BITGROOM || confparams_cpr->sol_ID==BITSHAVE || confparams_cpr->sol_ID==BITSET)
+	if(confparams_cpr->bgMode==BITGROOM || confparams_cpr->bgMode==BITSHAVE || confparams_cpr->bgMode==BITSET)
 	{
 		modeBuf = iniparser_getstring(ini, "PARAMETER:zlibMode", NULL);
 		if(modeBuf==NULL)
@@ -128,7 +128,7 @@ int BG_ReadConf(const char* bg_cfgFile) {
 			return BG_NSCS;
 		}
 	
-		modeBuf = iniparser_getstring(ini, "PARAMTER:bgMode", NULL);
+		modeBuf = iniparser_getstring(ini, "PARAMETER:bgMode", "BITGROOM");
 		if(strcmp(modeBuf, "BITGROOM")==0)
 			confparams_cpr->bgMode = BITGROOM;
 		else if(strcmp(modeBuf, "BITSHAVE")==0)
@@ -142,7 +142,7 @@ int BG_ReadConf(const char* bg_cfgFile) {
 		else if(strcmp(modeBuf, "DSD")==0)
 			confparams_cpr->errorControlMode = BG_DSD;
 		
-		confparams_cpr->NSD = (int)iniparser_getint(ini, "PARAMETER:NDS", 0);
+		confparams_cpr->NSD = (int)iniparser_getint(ini, "PARAMETER:NSD", 0);
 		confparams_cpr->DSD = (int)iniparser_getint(ini, "PARAMETER:DSD", 0);
 	}
     iniparser_freedict(ini);

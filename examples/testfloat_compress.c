@@ -57,6 +57,8 @@ int main(int argc, char * argv[])
     printf("cfgFile=%s\n", cfgFile); 
     sprintf(outputFilePath, "%s.bg", oriFilePath);
    
+	BG_LoadConf(cfgFile);
+   
     float *data = readFloatData(oriFilePath, &nbEle, &status);
     if(status != BG_SCES)
     {
@@ -66,7 +68,7 @@ int main(int argc, char * argv[])
    
     size_t outSize = 1; 
     cost_start();
-    unsigned char *bytes = (unsigned char*)malloc(1);
+    unsigned char *bytes = BG_compress(BG_FLOAT, data, &outSize, nbEle);
     cost_end();
     printf("timecost=%f\n",totalCost); 
     writeByteData(bytes, outSize, outputFilePath, &status);
