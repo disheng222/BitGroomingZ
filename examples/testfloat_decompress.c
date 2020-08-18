@@ -66,7 +66,7 @@ int main(int argc, char * argv[])
   
  
     cost_start();
-    float *data = (float*)malloc(sizeof(float));
+    float *data = BG_decompress(BG_FLOAT, bytes, byteLength, nbEle);
     cost_end();
   
     free(bytes); 
