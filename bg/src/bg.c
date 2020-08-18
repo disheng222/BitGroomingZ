@@ -164,11 +164,15 @@ void *BG_decompress(int dataType, unsigned char *bytes, size_t byteLength, size_
 {
 	if(dataType==BG_FLOAT)
 	{
-		return NULL;
+		unsigned char* decompressedData;
+		zlib_uncompress5(bytes, byteLength, &decompressedData, nbEle*sizeof(float));
+		return decompressedData;
 	}
 	else //BG_DOUBLE
 	{
-		return NULL;
+		unsigned char* decompressedData;
+		zlib_uncompress5(bytes, byteLength, &decompressedData, nbEle*sizeof(double));
+		return decompressedData;
 	}
 }
 
