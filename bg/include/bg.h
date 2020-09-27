@@ -89,6 +89,13 @@ extern bg_params *confparams_dec;
 extern bg_exedata *exe_params;
 
 
+//for libpressio
+extern int bgMode_libpressio;
+extern int errorControlMode_libpressio;
+extern int nsd_libpressio;
+extern int dsd_libpressio;
+
+
 unsigned char *BG_compress(int dataType, void *data, size_t *outSize, size_t nbEle);
 
 unsigned char* BG_compress_args(int dataType, void *data, size_t *outSize, int bgMode, int errorControlMode, int nsd, int dsd, size_t nbEle);

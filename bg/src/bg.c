@@ -16,6 +16,11 @@ bg_params *confparams_dec = NULL; //used for decompression
 
 bg_exedata *exe_params = NULL;
 
+int bgMode_libpressio = BITGROOM;
+int errorControlMode_libpressio = BG_NSD;
+int nsd_libpressio = 5;
+int dsd_libpressio = 5;
+
 
 unsigned char *BG_compress(int dataType, void *data, size_t *outSize, size_t nbEle)
 {
@@ -24,6 +29,7 @@ unsigned char *BG_compress(int dataType, void *data, size_t *outSize, size_t nbE
 
 unsigned char* BG_compress_args(int dataType, void *data, size_t *outSize, int bgMode, int errorControlMode, int nsd, int dsd, size_t nbEle)
 {
+
 	int dataTypeLen = dataType==BG_FLOAT?sizeof(float):sizeof(double);	
 
 	size_t bufferSize = dataTypeLen*nbEle;
@@ -161,7 +167,7 @@ unsigned char* BG_compress_args(int dataType, void *data, size_t *outSize, int b
 }
 
 void *BG_decompress(int dataType, unsigned char *bytes, size_t byteLength, size_t nbEle)
-{
+{	
 	if(dataType==BG_FLOAT)
 	{
 		unsigned char* decompressedData;
