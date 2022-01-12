@@ -105,46 +105,44 @@ int BG_ReadConf(const char* bg_cfgFile) {
 		return BG_NSCS;
     }
 	
-	if(confparams_cpr->bgMode==BITGROOM || confparams_cpr->bgMode==BITSHAVE || confparams_cpr->bgMode==BITSET)
+	modeBuf = iniparser_getstring(ini, "PARAMETER:zlibMode", NULL);
+	if(modeBuf==NULL)
 	{
-		modeBuf = iniparser_getstring(ini, "PARAMETER:zlibMode", NULL);
-		if(modeBuf==NULL)
-		{
-			printf("[BG] Error: Null Zlib mode setting (please check bg.config file)\n");
-			iniparser_freedict(ini);
-			return BG_NSCS;					
-		}		
-		else if(strcmp(modeBuf, "Zlib_NO_COMPRESSION")==0)
-			confparams_cpr->zlibMode = 0;
-		else if(strcmp(modeBuf, "Zlib_BEST_SPEED")==0)
-			confparams_cpr->zlibMode = 1;
-		else if(strcmp(modeBuf, "Zlib_BEST_COMPRESSION")==0)
-			confparams_cpr->zlibMode = 9;
-		else if(strcmp(modeBuf, "Zlib_DEFAULT_COMPRESSION")==0)
-			confparams_cpr->zlibMode = -1;
-		else
-		{
-			printf("[BG] Error: Wrong zlib Mode /please check bg.config file)\n");
-			return BG_NSCS;
-		}
-	
-		modeBuf = iniparser_getstring(ini, "PARAMETER:bgMode", "BITGROOM");
-		if(strcmp(modeBuf, "BITGROOM")==0)
-			confparams_cpr->bgMode = BITGROOM;
-		else if(strcmp(modeBuf, "BITSHAVE")==0)
-			confparams_cpr->bgMode = BITSHAVE;
-		else if(strcmp(modeBuf, "BITSET")==0)
-			confparams_cpr->bgMode = BITSET;
-		
-		modeBuf = iniparser_getstring(ini, "PARAMETER:errorControlMode", BG_NSD);
-		if(strcmp(modeBuf, "NSD")==0)
-			confparams_cpr->errorControlMode = BG_NSD;
-		else if(strcmp(modeBuf, "DSD")==0)
-			confparams_cpr->errorControlMode = BG_DSD;
-		
-		confparams_cpr->NSD = (int)iniparser_getint(ini, "PARAMETER:NSD", 0);
-		confparams_cpr->DSD = (int)iniparser_getint(ini, "PARAMETER:DSD", 0);
+		printf("[BG] Error: Null Zlib mode setting (please check bg.config file)\n");
+		iniparser_freedict(ini);
+		return BG_NSCS;					
+	}		
+	else if(strcmp(modeBuf, "Zlib_NO_COMPRESSION")==0)
+		confparams_cpr->zlibMode = 0;
+	else if(strcmp(modeBuf, "Zlib_BEST_SPEED")==0)
+		confparams_cpr->zlibMode = 1;
+	else if(strcmp(modeBuf, "Zlib_BEST_COMPRESSION")==0)
+		confparams_cpr->zlibMode = 9;
+	else if(strcmp(modeBuf, "Zlib_DEFAULT_COMPRESSION")==0)
+		confparams_cpr->zlibMode = -1;
+	else
+	{
+		printf("[BG] Error: Wrong zlib Mode /please check bg.config file)\n");
+		return BG_NSCS;
 	}
+
+	modeBuf = iniparser_getstring(ini, "PARAMETER:bgMode", "BITGROOM");
+	if(strcmp(modeBuf, "BITGROOM")==0)
+		confparams_cpr->bgMode = BITGROOM;
+	else if(strcmp(modeBuf, "BITSHAVE")==0)
+		confparams_cpr->bgMode = BITSHAVE;
+	else if(strcmp(modeBuf, "BITSET")==0)
+		confparams_cpr->bgMode = BITSET;
+	
+	modeBuf = iniparser_getstring(ini, "PARAMETER:errorControlMode", BG_NSD);
+	if(strcmp(modeBuf, "NSD")==0)
+		confparams_cpr->errorControlMode = BG_NSD;
+	else if(strcmp(modeBuf, "DSD")==0)
+		confparams_cpr->errorControlMode = BG_DSD;
+	
+	confparams_cpr->NSD = (int)iniparser_getint(ini, "PARAMETER:NSD", 0);
+	confparams_cpr->DSD = (int)iniparser_getint(ini, "PARAMETER:DSD", 0);
+
     iniparser_freedict(ini);
     return BG_SCES;
 }
