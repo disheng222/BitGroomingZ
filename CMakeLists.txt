@@ -56,9 +56,15 @@ find_package(PkgConfig)
 #by default pass no 3rd party exports
 set(thirdparty_export "")
 
-add_subdirectory(zlib)
-set(ZLIB_dep ZLIB)
-list(APPEND thirdparty_export "ZLIB")
+find_package(ZLIB)
+if(ZLIB_FOUND)
+  set(zlib_dep ZLIB::ZLIB)
+else()
+  add_subdirectory(zlib)
+  set(zlib_dep ZLIB)
+  list(APPEND thirdparty_export "ZLIB")
+endif()
+
 add_subdirectory(bg)
 
 configure_file(
