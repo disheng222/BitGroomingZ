@@ -14,7 +14,7 @@ target_include_directories(bg
   $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}/bg>
   )
 
-target_link_libraries (bg PUBLIC ${ZLIB_dep} m)
+target_link_libraries (bg PUBLIC ${zlib_dep} m)
 
 target_compile_options(bg
 	PRIVATE $<$<CONFIG:Debug>:-Wextra -Wpedantic -Wno-unused-parameter>
